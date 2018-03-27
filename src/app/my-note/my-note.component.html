@@ -1,0 +1,58 @@
+<div class="contentCenter">
+  <div class="col-lg-6 mt30">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="add Info..." [(ngModel)]="inputValue" (keyup.enter)="addTodos()">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="addTodos()" >添加</button>
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-6 mt30">
+    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0,ngb-panel-1,ngb-panel-2">
+      <ngb-panel type="primary">
+        <ng-template ngbPanelTitle>
+          <span class="white">未完成({{unComplete.length || 0}})</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+
+          <div class="card-body" *ngFor="let i = index;let uc of unComplete">
+            <span>
+              {{uc.things}}
+            </span>
+            <button type="button" class="btn btn-primary" (click)="addCompleted(i)">已完成</button>
+          </div>
+
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel type="success">
+        <ng-template ngbPanelTitle>
+          <span class="white">已完成({{completed.length || 0}})</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="card-body" *ngFor="let i = index;let uc of completed">
+            <span>
+              {{uc.things}}
+            </span>
+            <button type="button" class="btn btn-primary" (click)="remove(i)">删除</button>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel type="danger">
+        <ng-template ngbPanelTitle>
+          <span class="white">已删除({{deleted.length || 0}})</span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          <div class="card-body" *ngFor="let i = index;let uc of deleted">
+            <span>
+              {{uc.things}}
+            </span>
+            <button type="button" class="btn btn-primary" (click)="revert(i)">还原</button>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </div>
+</div>
+
+
+

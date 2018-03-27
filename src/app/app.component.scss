@@ -1,0 +1,13 @@
+@import "../static/common.scss";
+.main{
+  display: flex;
+  flex-direction: row;
+}
+.main .sideBar{
+  width:20%;
+  flex-shrink: 0;
+}
+.main .mainContent{
+  flex-grow: 1;
+}
+

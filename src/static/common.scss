@@ -1,0 +1,21 @@
+ul,li{
+  padding:0;
+  margin:0;
+}
+.contentCenter {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+.mt30{
+  margin-top: 30px;
+}
+.white{
+  color: #fff;
+}
+a,span{
+ &:active{
+   text-decoration: none;
+ }
+}
