@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MyMenuComponent } from '../components/my-menu/my-menu.component';
 import { MyHeaderComponent } from '../components/my-header/my-header.component';
 import { MyNoteComponent } from '../components/my-note/my-note.component';
+import { MyWelcomeComponent } from '../components/my-welcome/my-welcome.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MyNoteComponent } from '../components/my-note/my-note.component';
     MyMenuComponent,
     MyHeaderComponent,
     MyNoteComponent,
+    MyWelcomeComponent
   ],
   imports: [
     BrowserModule,
