@@ -11,5 +11,7 @@ export class MyMenuComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  clearStorage() {
+    localStorage.clear();
+  }
 }

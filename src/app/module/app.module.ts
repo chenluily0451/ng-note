@@ -4,11 +4,11 @@ import {NgbAccordionConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 
-import { AppComponent } from './app.component';
+import { AppComponent } from '../components/layout/app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { MyMenuComponent } from './my-menu/my-menu.component';
-import { MyHeaderComponent } from './my-header/my-header.component';
-import { MyNoteComponent } from './my-note/my-note.component';
+import { MyMenuComponent } from '../components/my-menu/my-menu.component';
+import { MyHeaderComponent } from '../components/my-header/my-header.component';
+import { MyNoteComponent } from '../components/my-note/my-note.component';
 
 
 @NgModule({
