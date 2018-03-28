@@ -1,18 +1,1 @@
-@import "../../../static/common";
-.sideBarMenu{
-  width:100%;
-  border-right:1px solid #ccc;
-  li{
-    list-style: none;
-    padding:1rem 1rem;
-    border-bottom:1px solid #ccc;
-    outline:none;
 
-    &:hover{
-      background: #f7f7f7;
-    }
-    &.active{
-      background: #f7f7f7;
-    }
-  }
-}

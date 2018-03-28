@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbAccordionConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ElModule } from 'element-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from '../components/layout/app.component';
@@ -10,6 +12,8 @@ import { MyMenuComponent } from '../components/my-menu/my-menu.component';
 import { MyHeaderComponent } from '../components/my-header/my-header.component';
 import { MyNoteComponent } from '../components/my-note/my-note.component';
 import { MyWelcomeComponent } from '../components/my-welcome/my-welcome.component';
+import { MyDataListComponent } from '../components/my-dataList/my-dataList.component';
+
 
 
 @NgModule({
@@ -18,13 +22,16 @@ import { MyWelcomeComponent } from '../components/my-welcome/my-welcome.componen
     MyMenuComponent,
     MyHeaderComponent,
     MyNoteComponent,
-    MyWelcomeComponent
+    MyWelcomeComponent,
+    MyDataListComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ElModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [NgbAccordionConfig],
   bootstrap: [AppComponent]

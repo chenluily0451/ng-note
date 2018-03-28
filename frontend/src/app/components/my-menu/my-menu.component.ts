@@ -13,5 +13,8 @@ export class MyMenuComponent implements OnInit {
   }
   clearStorage() {
     localStorage.clear();
+    setTimeout(() => {
+      location.href = location.href;
+    });
   }
 }
