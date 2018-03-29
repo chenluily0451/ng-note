@@ -1,5 +1,9 @@
 import { Component, OnInit, Inject , forwardRef } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, AbstractControl} from '@angular/forms';
+import { ElMessageService } from 'element-angular'
+
+// service
+import {DataManageService} from '../../service/dataManage.service';
 
 @Component({
   selector: 'app-my-datalist',
@@ -10,29 +14,22 @@ import {FormBuilder, FormControl, FormGroup, AbstractControl} from '@angular/for
 export class MyDataListComponent implements OnInit {
   validateForm: FormGroup;
   constructor(
-    @Inject(forwardRef(() => FormBuilder)) private formBuilder: FormBuilder
+    @Inject(forwardRef(() => FormBuilder)) private formBuilder: FormBuilder,
+    private dataManageService: DataManageService,
+    private message: ElMessageService
   ) {
   }
   dialogVisible: Boolean = false;
+  deletedDialogVisible: Boolean = false;
+  deletedId: String = '';
 
-  tableData: any[] = [{
-    name: '水爷',
-    date: '2017-08-19',
-    address: '上海市普陀区金沙江路 1518 弄',
-  }, {
-    name: '水爷',
-    date: '2017-08-20',
-    address: '上海市普陀区金沙江路 1518 弄',
-  }, {
-    name: '水爷',
-    date: '2017-08-21',
-    address: '上海市普陀区金沙江路 1518 弄',
-  }, {
-    name: '水爷',
-    date: '2017-08-22',
-    address: '上海市普陀区金沙江路 1510 弄',
-  }];
+  tableData: any[] = [];
   ngOnInit() {
+    this.initForm();
+    this.getDataList();
+  }
+
+  initForm() {
     this.validateForm = this.formBuilder.group({
       name: ['', [this.nameValidator]],
       date: ['', [this.timeValidator]],
@@ -72,10 +69,41 @@ export class MyDataListComponent implements OnInit {
     return ;
   }
 
-
   submit(): void {
     console.log(this.validateForm);
+    const obj = {
+      name: this.validateForm.get('name').value,
+      date: this.validateForm.get('date').value,
+      address: this.validateForm.get('address').value,
+    }
+    this.dataManageService.addDataList(obj).subscribe(
+      (result) => {
+        console.log(result);
+        this.dialogVisible = false;
+        this.getDataList();
+        this.message['success']('提交成功');
+      }
+    );
 
+  }
+
+  getDataList() {
+    this.dataManageService.getDataList().subscribe(
+      (result) => {
+        this.tableData = result;
+      }
+    );
+  }
+
+  delYep() {
+    this.dataManageService.deleteData(this.deletedId).subscribe(
+      (result) => {
+        console.log(result);
+        this.deletedDialogVisible = false;
+        this.getDataList();
+        this.message['success']('删除成功');
+      }
+    );
   }
 
   statusCtrl(item: string): string {
@@ -90,6 +118,11 @@ export class MyDataListComponent implements OnInit {
     if (!this.validateForm.controls[item]) { return; }
     const control: AbstractControl = this.validateForm.controls[item];
     return control.dirty && control.hasError('message') ? control.errors.message : '';
+  }
+
+  deleteModal(ref: any) {
+    this.deletedDialogVisible = true;
+    this.deletedId = ref.rowData._id;
   }
 
 

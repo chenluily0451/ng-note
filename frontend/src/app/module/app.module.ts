@@ -14,6 +14,8 @@ import { MyNoteComponent } from '../components/my-note/my-note.component';
 import { MyWelcomeComponent } from '../components/my-welcome/my-welcome.component';
 import { MyDataListComponent } from '../components/my-dataList/my-dataList.component';
 
+import {DataManageService} from '../service/dataManage.service';
+
 
 
 @NgModule({
@@ -34,7 +36,10 @@ import { MyDataListComponent } from '../components/my-dataList/my-dataList.compo
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [NgbAccordionConfig],
+  providers: [
+    NgbAccordionConfig,
+    DataManageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
