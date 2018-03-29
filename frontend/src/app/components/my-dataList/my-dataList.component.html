@@ -1,4 +1,4 @@
-  <el-table [model]="tableData" [scroll-x]="true" center="all" stripe="true">
+  <el-table [model]="tableData" [scroll-x]="true" center="all" stripe="true" border="true">
     <el-table-column model-key="name" label="姓名" width="100%">
     </el-table-column>
     <el-table-column model-key="date" label="日期" width="100%">
@@ -11,4 +11,29 @@
       </ng-template>
     </el-table-column>
   </el-table>
-  <el-button type="primary" width="100%" class="addBtn">添加数据</el-button>
+  <el-button type="primary" width="100%" class="addBtn" (click)="dialogVisible = true">添加数据</el-button>
+
+  <el-dialog [title]="'添加数据'" [(visible)]="dialogVisible" width="30%">
+    <el-form [formGroup]="validateForm" label-width="100px"
+             [show-icon]="true" [show-message]="true" el-class="form-demo">
+
+      <el-form-item label="姓名" [required]="true" [status]="statusCtrl('name')" [error]="messageCtrl('name')">
+        <el-input formControlName="name" placeholder="请输入姓名"></el-input>
+      </el-form-item>
+
+      <el-form-item label="日期" [required]="true" [status]="statusCtrl('date')" [error]="messageCtrl('date')">
+        <el-date-picker formControlName="date"
+                        (modelChange)="handle($event)"
+                        [format]="'yyyy-MM-dd'">
+        </el-date-picker>
+      </el-form-item>
+
+      <el-form-item label="地址" [required]="true" [status]="statusCtrl('address')" [error]="messageCtrl('address')">
+        <el-input formControlName="address" placeholder="请输入地址"></el-input>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" (click)="submit()" [elDisabled]="!validateForm.valid">提交</el-button>
+      </el-form-item>
+    </el-form>
+  </el-dialog>

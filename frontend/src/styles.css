@@ -3,3 +3,9 @@
   margin-top: 10px!important;
   width: 100%;
 }
+
+
+/*时间输入框*/
+.el-date-editor.el-input{
+  width:100%!important;
+}

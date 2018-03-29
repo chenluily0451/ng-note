@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbAccordionConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { NgbAccordionConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ElModule } from 'element-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -31,7 +31,8 @@ import { MyDataListComponent } from '../components/my-dataList/my-dataList.compo
     AppRoutingModule,
     FormsModule,
     ElModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [NgbAccordionConfig],
   bootstrap: [AppComponent]
