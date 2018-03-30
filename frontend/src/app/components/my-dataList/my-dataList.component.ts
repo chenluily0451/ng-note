@@ -2,6 +2,7 @@ import { Component, OnInit, Inject , forwardRef } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, AbstractControl} from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ElMessageService } from 'element-angular';
+import {nameValidator, timeValidator, addressValidator} from '../validators/validators';
 
 // service
 import {DataManageService} from '../../service/dataManage.service';
@@ -36,42 +37,10 @@ export class MyDataListComponent implements OnInit {
 
   initForm() {
     this.validateForm = this.formBuilder.group({
-      name: ['', [this.nameValidator]],
-      date: ['', [this.timeValidator]],
-      address: ['', [this.addressValidator]]
+      name: ['', [nameValidator]],
+      date: ['', [timeValidator]],
+      address: ['', [addressValidator]]
     });
-  }
-  private nameValidator = (control: FormControl) => {
-    if (!control.value) {
-      return { status: 'error', message: '姓名是必填的'};
-    }
-    if (control.value.length < 1) {
-      return {status: 'error', message: '姓名不能少于1个字'};
-    }
-    if (control.value.length > 6) {
-      return {status: 'error', message: '姓名不能多于6个字'};
-    }
-     return ;
-  }
-
-  private timeValidator = (control: FormControl) => {
-    if (!control.value) {
-      return { status: 'error', message: '请选择时间'};
-    }
-    return ;
-  }
-
-  private addressValidator = (control: FormControl) => {
-    if (!control.value) {
-      return { status: 'error', message: '请输入地址'};
-    }
-    if (control.value.length < 1) {
-      return {status: 'error', message: '地址不能少于1个字'};
-    }
-    if (control.value.length > 16) {
-      return {status: 'error', message: '地址不能多于16个字'};
-    }
-    return ;
   }
 
   submit(): void {
@@ -101,8 +70,6 @@ export class MyDataListComponent implements OnInit {
         }
       );
     }
-
-
   }
 
   getDataList() {
@@ -164,7 +131,6 @@ export class MyDataListComponent implements OnInit {
       address: this.tableData[ref.index].address
     };
     this.patchValueFun(changeObj);
-
   }
 
   patchValueFun(obj: any) {
