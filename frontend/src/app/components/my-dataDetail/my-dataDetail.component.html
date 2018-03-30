@@ -1,0 +1,23 @@
+
+
+<div class="main">
+
+
+  <el-table [model]="tableData" [scroll-x]="false" center="all" stripe="true" border="true">
+    <el-table-column model-key="name" label="姓名" width="100%">
+    </el-table-column>
+    <el-table-column model-key="date" label="日期" width="100%">
+    </el-table-column>
+    <el-table-column model-key="address" label="地址" width="100%" [render-html]="true">
+    </el-table-column>
+  </el-table>
+  <div el-row type="flex" class="row-bg" justify="center" align="middle">
+    <div el-col [span]="24">
+      <div class="grid-content bg-purple">
+        <el-button type="primary" (click)="returnFun()" class="returnBtn">返回</el-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

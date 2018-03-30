@@ -7,13 +7,15 @@
     </el-table-column>
     <el-table-column label="操作" width="100%">
       <ng-template #slot let-scope="scope">
+        <el-button type="text" size="small" (click)="jumpTo(scope)">查看</el-button>
+        <el-button type="text" size="small" (click)="changeModal(scope)">更改</el-button>
         <el-button type="text" size="small" (click)="deleteModal(scope)">删除</el-button>
       </ng-template>
     </el-table-column>
   </el-table>
-  <el-button type="primary" width="100%" class="addBtn" (click)="dialogVisible = true">添加数据</el-button>
+  <el-button type="primary" width="100%" class="addBtn" (click)="addDataModal()">添加数据</el-button>
 
-  <el-dialog [title]="'添加数据'" [(visible)]="dialogVisible" width="30%">
+  <el-dialog [title]="dialogTitle" [(visible)]="dialogVisible" width="30%">
     <el-form [formGroup]="validateForm" label-width="100px"
              [show-icon]="true" [show-message]="true" el-class="form-demo">
 
@@ -23,7 +25,6 @@
 
       <el-form-item label="日期" [required]="true" [status]="statusCtrl('date')" [error]="messageCtrl('date')">
         <el-date-picker formControlName="date"
-                        (modelChange)="handle($event)"
                         [format]="'yyyy-MM-dd'">
         </el-date-picker>
       </el-form-item>

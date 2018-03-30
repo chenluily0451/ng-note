@@ -38,4 +38,34 @@ router.delete("/datalist/:id",(req, res) => {
   })
 })
 
+router.put("/datalist/:id",(req, res)=>{
+  dataModel.findOneAndUpdate(
+    {_id: req.params.id},
+    {
+      $set:{
+        name: req.body.name,
+        date: req.body.date,
+        address: req.body.address
+      }
+    },function (err,data) {
+      if(err){
+        res.send(err)
+      }else{
+        res.json(data)
+        console.log(data + 'has been updated')
+      }
+    }
+  )
+})
+
+router.get("/datalist/:id",(req, res) =>{
+  dataModel.findById(req.params.id)
+    .then(data =>{
+      res.json(data)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+})
+
 module.exports = router

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject , forwardRef } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, AbstractControl} from '@angular/forms';
-import { ElMessageService } from 'element-angular'
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ElMessageService } from 'element-angular';
 
 // service
 import {DataManageService} from '../../service/dataManage.service';
@@ -16,12 +17,16 @@ export class MyDataListComponent implements OnInit {
   constructor(
     @Inject(forwardRef(() => FormBuilder)) private formBuilder: FormBuilder,
     private dataManageService: DataManageService,
-    private message: ElMessageService
+    private message: ElMessageService,
+    private router: Router
   ) {
   }
-  dialogVisible: Boolean = false;
-  deletedDialogVisible: Boolean = false;
-  deletedId: String = '';
+  dialogVisible: boolean = false;
+  deletedDialogVisible: boolean = false;
+  deletedId: string = '';
+  dialogTitle: string = '添加数据';
+  updateStatus: boolean = false;
+  updateId: string = '';
 
   tableData: any[] = [];
   ngOnInit() {
@@ -74,16 +79,29 @@ export class MyDataListComponent implements OnInit {
     const obj = {
       name: this.validateForm.get('name').value,
       date: this.validateForm.get('date').value,
-      address: this.validateForm.get('address').value,
+      address: this.validateForm.get('address').value
+    };
+
+    if (!this.updateStatus) {
+      this.dataManageService.addDataList(obj).subscribe(
+        (result) => {
+          console.log(result);
+          this.dialogVisible = false;
+          this.getDataList();
+          this.message['success']('提交成功');
+        }
+      );
+    } else {
+      this.dataManageService.updateData(this.updateId, obj).subscribe(
+        (result) => {
+          console.log(result);
+          this.dialogVisible = false;
+          this.getDataList();
+          this.message['success']('更新成功');
+        }
+      );
     }
-    this.dataManageService.addDataList(obj).subscribe(
-      (result) => {
-        console.log(result);
-        this.dialogVisible = false;
-        this.getDataList();
-        this.message['success']('提交成功');
-      }
-    );
+
 
   }
 
@@ -109,9 +127,7 @@ export class MyDataListComponent implements OnInit {
   statusCtrl(item: string): string {
     if (!this.validateForm.controls[item]) { return; }
     const control: AbstractControl = this.validateForm.controls[item];
-
     return control.dirty && control.hasError('status') ? control.errors.status : '';
-
   }
 
   messageCtrl(item: string): string {
@@ -120,17 +136,43 @@ export class MyDataListComponent implements OnInit {
     return control.dirty && control.hasError('message') ? control.errors.message : '';
   }
 
+  addDataModal() {
+    this.dialogVisible = true;
+    this.dialogTitle = '添加数据';
+    this.updateStatus = false;
+    const addObj = {
+      name: '',
+      date: '',
+      address: ''
+    };
+    this.patchValueFun(addObj);
+  }
+
   deleteModal(ref: any) {
     this.deletedDialogVisible = true;
     this.deletedId = ref.rowData._id;
   }
 
+  changeModal(ref: any) {
+    this.dialogVisible = true;
+    this.dialogTitle = '更改数据';
+    this.updateStatus = true;
+    this.updateId = ref.rowData._id;
+    const changeObj = {
+      name: this.tableData[ref.index].name,
+      date: this.tableData[ref.index].date,
+      address: this.tableData[ref.index].address
+    };
+    this.patchValueFun(changeObj);
 
-
-
-  handle(time: number): void {
-    // [time] is string
-    // date style follow format props
-    console.log(time)
   }
+
+  patchValueFun(obj: any) {
+    this.validateForm.patchValue(obj);
+  }
+
+  jumpTo(ref) {
+    this.router.navigate(['/datalist/' + ref.rowData._id]);
+  }
+
 }

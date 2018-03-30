@@ -13,6 +13,7 @@ import { MyHeaderComponent } from '../components/my-header/my-header.component';
 import { MyNoteComponent } from '../components/my-note/my-note.component';
 import { MyWelcomeComponent } from '../components/my-welcome/my-welcome.component';
 import { MyDataListComponent } from '../components/my-dataList/my-dataList.component';
+import { MyDataDetailComponent } from '../components/my-dataDetail/my-dataDetail.component';
 
 import {DataManageService} from '../service/dataManage.service';
 
@@ -25,7 +26,8 @@ import {DataManageService} from '../service/dataManage.service';
     MyHeaderComponent,
     MyNoteComponent,
     MyWelcomeComponent,
-    MyDataListComponent
+    MyDataListComponent,
+    MyDataDetailComponent
   ],
   imports: [
     BrowserModule,

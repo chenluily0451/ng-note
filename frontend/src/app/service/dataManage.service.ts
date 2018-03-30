@@ -24,12 +24,26 @@ export class DataManageService {
         return body || [];
       });
   }
-  deleteData(deleteId: String): Observable <any> {
+  deleteData(deleteId: string): Observable <any> {
     return this.http.delete('/api/datalist/' + deleteId)
       .map((res: Response) => {
         const body = res.json();
-        console.log(body)
+        console.log(body);
         return body.data || [];
       });
+  }
+  updateData(id: string, updateObj: any): Observable <any> {
+    return this.http.put('/api/datalist/' + id, updateObj)
+      .map((res: Response) => {
+        const body = res.json();
+        return body.data;
+      });
+  }
+  getDataId(id: string): Observable<any> {
+    return this.http.get('/api/datalist/' + id)
+      .map((res: Response) => {
+      const body = res.json();
+      return body;
+    });
   }
 }
