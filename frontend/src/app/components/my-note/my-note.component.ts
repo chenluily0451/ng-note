@@ -53,5 +53,11 @@ export class MyNoteComponent implements OnInit {
     ls_uncompleted.get();
     ls_deleted.get();
   }
+  clearStorage() {
+    localStorage.clear();
+    setTimeout(() => {
+      location.reload();
+    });
+  }
 
 }

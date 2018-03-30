@@ -11,10 +11,6 @@ export class MyMenuComponent implements OnInit {
 
   ngOnInit() {
   }
-  clearStorage() {
-    localStorage.clear();
-    setTimeout(() => {
-      location.href = location.href;
-    });
-  }
+
+
 }
