@@ -1,4 +1,4 @@
-
+import {FormControl} from '@angular/forms';
 export const nameValidator = (control: FormControl) => {
   if (!control.value) {
     return { status: 'error', message: '姓名是必填的'};
